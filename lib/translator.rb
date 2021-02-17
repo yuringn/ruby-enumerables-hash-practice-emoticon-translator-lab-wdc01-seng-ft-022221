@@ -4,9 +4,7 @@ def load_library(file_path)
   emoticons = YAML.load_file('lib/emoticons.yml')
   new_hash={}
   emoticons.map do |key,value|
-if !new_hash[key]
   new_hash[key]={}
-end
 new_hash[key].store(:english,value[0])
 new_hash[key].store(:japanese, value[1])
 end
@@ -19,11 +17,8 @@ load_library("lib/emoticons.yml")
 def get_japanese_emoticon(file_path, emoticon)
 hash = load_library("./lib/emoticons.yml")
 hash.map do |key,value|
-  if value[:english] == emoticon
-    return value[:japanese]
-  end
-end
-return "Sorry, that emoticon was not found"
+  value[:english] == emoticon
+  emoticon? value[:japanese] : "Sorry, that emoticon was not found"
 end
 get_japanese_emoticon("./lib/emoticons.yml", ":)")
 
